@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TechDaily · 已注入深度优化脚本</title>
+
+<!-- 等价于 Tampermonkey @run-at document-start：
+     第一个脚本先于页面自身逻辑执行，网络 hook 与事件解禁才能生效 -->
+<script src="../dist/init.js"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ad-banner" data-ad="top">
+    <span>广告</span> 新人礼包限时领取，点击立即打开 &gt;&gt;
+  </div>
+
+  <header class="site-header">
+    <div class="logo">TechDaily</div>
+    <nav>
+      <a href="#">首页</a>
+      <a href="#">专栏</a>
+      <a href="#">周刊</a>
+      <a href="#">关于</a>
+    </nav>
+  </header>
+
+  <div class="layout">
+    <main>
+      <article class="post">
+        <h1>把浏览器变成自己的工作台：前端可控性的边界在哪里</h1>
+        <div class="meta">2026-10-21 · 阅读 12 分钟 · 作者 佚名</div>
+
+        <div class="article-body" data-locked="1">
+          <p>页面渲染完成的瞬间，它就已经是一棵可以被任意改写的 DOM 树。你看到的排版、颜色、间距，全部是声明式的产物，而声明式的东西天生可以覆盖。</p>
+          <p>真正决定"能不能改"的从来不是前端框架，而是数据边界：浏览器进程内的一切归你，跨域请求与服务器校验不归你。</p>
+          <p>先说结论：浏览器进程内发生的一切，都归你。DOM 可以改，样式可以覆盖，网络请求可以拦截，存储可以读，定时器可以重写。这不是漏洞，是设计。网页从来就不是只读的。</p>
+          <p>真正受限的地方只有三处。第一，浏览器自身的界面，那是扩展 API 的地盘，页面脚本碰不到。第二，跨域请求的返回体，受同源策略约束，只有用户脚本的 GM_xmlhttpRequest 或者服务端的 CORS 头能打开。第三，服务端的校验，前端改多少都只是改显示。</p>
+          <p>很多人把"前端能做什么"理解成"能不能改颜色"，这差得太远。一个成熟的用户脚本，第五层就已经在做接口净化了：它在数据进入渲染层之前，把带推广标记的条目从数组里摘掉。页面最终显示什么，取决于脚本愿意让什么通过。</p>
+          <p>代价是你要自己扛住重渲染。框架下一次 setState 可能把你改过的节点整块重建，所以所有手术都得设计成幂等的，能被反复执行而不出错。这是脚本和框架之间长期的拉锯。</p>
+          <p>最后一句：写得好的用户脚本不该让页面变卡。MutationObserver 回调里再次改 DOM 会引发新的变更通知，稍不注意就是每秒上百次的空转。判断标准很简单——挂上脚本静置一分钟，看清扫轮次还涨不涨。</p>
+          <p id="secret-line">这一段是被付费墙锁住的正文。如果它在你眼里是清晰的，说明覆盖层已经被拆掉了。</p>
+        </div>
+
+        <div class="paywall-mask">
+          <div class="paywall-box">
+            <strong>继续阅读需开通会员</strong>
+            <p>￥18 / 月，解锁全部深度内容</p>
+            <button type="button">立即开通</button>
+          </div>
+        </div>
+      </article>
+
+      <section class="feed-wrap">
+        <h2>今日推荐</h2>
+        <div class="feed" id="feed"></div>
+      </section>
+    </main>
+
+    <aside class="recommend" id="recommend">
+      <h3>热门</h3>
+    </aside>
+  </div>
+
+  <div class="login-mask"></div>
+  <div class="login-modal" id="loginModal">
+    <h3>登录后继续</h3>
+    <p>登录即可同步收藏与阅读进度</p>
+    <input type="text" placeholder="手机号 / 邮箱">
+    <button type="button">登 录</button>
+    <span class="close-x">×</span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

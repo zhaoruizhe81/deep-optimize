@@ -1,0 +1,203 @@
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  color: #222222;
+  font: 16px/1.75 -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  /* 痛点 1：全局禁选 */
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.ad-banner {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(90deg, #ff6a00, #ee0979);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .5px;
+}
+.ad-banner span {
+  background: rgba(0, 0, 0, .25);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 400;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 60px;
+  border-bottom: 1px solid #eaeaea;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 50;
+}
+.logo { font-weight: 700; font-size: 18px; letter-spacing: -.3px; }
+.site-header nav a {
+  margin-left: 22px;
+  color: #555;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 36px 24px 80px;
+}
+
+.post h1 {
+  font-size: 30px;
+  line-height: 1.35;
+  margin: 0 0 12px;
+  letter-spacing: -.5px;
+}
+.meta { color: #999; font-size: 13px; margin-bottom: 28px; }
+
+.article-body {
+  font-size: 16px;
+  color: #333;
+  position: relative;
+}
+.article-body[data-locked="1"] {
+  /* 痛点 2：付费墙用 filter 模糊正文 */
+  filter: blur(3.2px);
+  max-height: 190px;
+  overflow: hidden;
+}
+
+.paywall-mask {
+  margin-top: -70px;
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 42%);
+  padding: 46px 0 20px;
+}
+.paywall-box {
+  text-align: center;
+  border: 1px solid #ffd8a8;
+  background: #fffaf2;
+  border-radius: 12px;
+  padding: 20px 34px;
+  box-shadow: 0 8px 30px rgba(255, 150, 40, .12);
+}
+.paywall-box p { margin: 6px 0 12px; color: #a8681f; font-size: 13px; }
+.paywall-box button {
+  border: 0;
+  background: #ff7a18;
+  color: #fff;
+  padding: 9px 26px;
+  border-radius: 999px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.feed-wrap { margin-top: 54px; }
+.feed-wrap h2 { font-size: 17px; margin: 0 0 14px; }
+
+.feed .item {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  transition: box-shadow .2s;
+}
+.feed .item h3 { margin: 0 0 6px; font-size: 15px; font-weight: 600; }
+.feed .item p { margin: 0; color: #777; font-size: 13px; }
+.feed .item.sponsored {
+  border-color: #ffe0b2;
+  background: #fffdf7;
+}
+.feed .item.sponsored::before {
+  content: "推广";
+  font-size: 11px;
+  color: #e07a00;
+  border: 1px solid #ffd699;
+  border-radius: 3px;
+  padding: 0 4px;
+  margin-right: 6px;
+}
+
+.recommend {
+  border-left: 1px solid #f0f0f0;
+  padding-left: 26px;
+}
+.recommend h3 { font-size: 14px; color: #888; margin: 0 0 14px; font-weight: 500; }
+.recommend .r-item {
+  font-size: 13px;
+  color: #444;
+  padding: 9px 0;
+  border-bottom: 1px dashed #eee;
+  line-height: 1.5;
+}
+.recommend .r-item.sponsored { color: #d2691e; }
+
+/* 痛点 3：登录弹窗遮罩，pointer-events 全屏拦截 */
+.login-mask {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .45);
+  z-index: 900;
+}
+.login-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 340px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 26px;
+  z-index: 901;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .3);
+}
+body.modal-open .login-mask,
+body.modal-open .login-modal { display: block; }
+body.modal-open { overflow: hidden; }
+
+.login-modal h3 { margin: 0 0 8px; font-size: 17px; }
+.login-modal p { margin: 0 0 16px; color: #888; font-size: 13px; }
+.login-modal input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 12px;
+  outline: none;
+}
+.login-modal button {
+  width: 100%;
+  padding: 11px;
+  border: 0;
+  border-radius: 8px;
+  background: #1a73e8;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+}
+.close-x {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 22px;
+  color: #bbb;
+  cursor: pointer;
+}

@@ -1,0 +1,8 @@
+[
+  { "id": 1, "title": "一次把 60 万行日志塞进浏览器内存的踩坑记录", "desc": "IndexedDB 分片 + 虚拟滚动的组合拳", "isAd": false },
+  { "id": 2, "title": "【广告】0 元领 AirPods，点击查看名额", "desc": "限时活动，先到先得", "isAd": true },
+  { "id": 3, "title": "MutationObserver 的性能陷阱：为什么你的脚本把页面拖卡了", "desc": "回调里再次改 DOM 会怎样", "isAd": false },
+  { "id": 4, "title": "【广告】企业级低代码平台，免费试用 30 天", "desc": "预约演示送定制方案", "isAd": true },
+  { "id": 5, "title": "从 SPA 路由劫持看 history API 的可写性", "desc": "pushState 补丁的正确写法", "isAd": false },
+  { "id": 6, "title": "前端如何拿到跨域数据：CORS、代理与用户脚本", "desc": "三种方案的边界对比", "isAd": false }
+]
