@@ -4,13 +4,18 @@
 // @version      1.0.0
 // @description  主题化 / 去广告 / 反禁复制 / 接口净化 / 阅读增强，五层一体
 // @author       YG
+// @homepageURL  https://github.com/zhaoruizhe81/deep-optimize
+// @updateURL    https://raw.githubusercontent.com/zhaoruizhe81/deep-optimize/main/userscript/deep-optimize.user.js
+// @downloadURL  https://raw.githubusercontent.com/zhaoruizhe81/deep-optimize/main/userscript/deep-optimize.user.js
 // @match        *://*/*
 // @run-at       document-start
 // @grant        GM_addStyle
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_registerMenuCommand
-// ==/UserScript==/* ============================================================
+// ==/UserScript==
+
+/* ============================================================
  * 站点深度优化核心（Deep Optimize Core）
  * 无头部逻辑体，既可被 userscript 头包裹，也可直接在浏览器注入。
  * 五层：主题 / 清障 / 交互解禁 / 数据净化 / 渲染增强

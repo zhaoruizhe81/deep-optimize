@@ -32,9 +32,9 @@ python3 -m http.server 8765 --bind 127.0.0.1
 先装 Tampermonkey（Chrome / Edge / Firefox / Safari 都有），然后点下面任一链接，油猴会自己弹出安装页：
 
 - **jsDelivr（推荐，CDN 更新快）**
-  <https://cdn.jsdelivr.net/gh/zhaoruizhe81-bot/deep-optimize@main/userscript/deep-optimize.user.js>
+  <https://cdn.jsdelivr.net/gh/zhaoruizhe81/deep-optimize@main/userscript/deep-optimize.user.js>
 - **GitHub Raw**
-  <https://raw.githubusercontent.com/zhaoruizhe81-bot/deep-optimize/main/userscript/deep-optimize.user.js>
+  <https://raw.githubusercontent.com/zhaoruizhe81/deep-optimize/main/userscript/deep-optimize.user.js>
 
 装完把 `@match *://*/*` 改成目标域名再保存，例如 `@match https://example.com/*`。通配全站能跑，但没必要让它每个页面都注入一遍。
 
